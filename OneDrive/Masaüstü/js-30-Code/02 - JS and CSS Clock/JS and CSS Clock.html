@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="clock">
+            <div class="cursor hour"></div>
+            <div class="cursor min"></div>
+            <div class="cursor second"></div>
+    </div>
+</body>
+<style>
+    html {
+        background: #018DED url(keçi.jpg);
+        background-size: cover;
+        text-align: center;
+    }
+    .clock {
+        width: 30rem;
+        height: 30rem;
+        border: 20px solid darkmagenta;
+        border-radius: 50%;
+        margin: 50px auto;
+        position: relative;
+    }
+    .cursor {
+        width: 50%;
+        height: 5px;
+        background: black;
+        position: absolute;
+        top: 50%;
+        transform-origin: 100%;
+        transition: 0.5s;
+    }
+</style>
+<script>
+    // Working on the Wes Bos Javascript 30 Tutorial series
+    const second = document.querySelector('.second');
+    const min = document.querySelector('.min');
+    const hour = document.querySelector('.hour');
+
+    function setDate() {
+        const now = new Date();
+        const seconds = now.getSeconds();
+        const secondsRotate = ((seconds / 60) * 360) + 90;
+        second.style.transform = `rotate(${secondsRotate}deg)`;
+
+        const mins = now.getMinutes();
+        const minsRotate = ((mins / 60) * 360) + ((seconds / 60) * 6) + 90;
+        min.style.transform = `rotate(${minsRotate}deg)`;
+
+        const hour = now.getHours();
+        const hourRotate = ((hour / 12) * 360) + ((mins / 60) * 30) + 90;
+        hour.style.transform = `rotate(${hourRotate}deg)`;
+    };
+    setInterval(setDate, 1000);
+    setDate();
+
+</script>
+
+</html>
